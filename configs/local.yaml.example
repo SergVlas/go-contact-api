@@ -1,0 +1,10 @@
+app:
+  name: "contacts1"
+  env: "local"
+
+log:
+  file: "log.log"
+
+http:
+  port: "1001"
+
