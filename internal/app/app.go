@@ -4,6 +4,8 @@ import (
 	"app1/internal/config"
 	httpServer "app1/internal/delivery/http"
 	logger "app1/internal/log"
+	"app1/internal/repository/memory"
+	"app1/internal/usecase"
 	"context"
 	"fmt"
 	fatalLog "log"
@@ -29,8 +31,17 @@ func Run() {
 		fatalLog.Fatalf("#app_e2. Error create new logger: %v", err)
 	}
 
+	// repository
+	contactRepo := memory.NewContactRepo()
+
+	// usecase
+	contactUsecase := usecase.NewContactUsecase(contactRepo)
+
+	// contacts handler
+	contactHandler := httpServer.NewContactHandler(contactUsecase)
+
 	// http handlers
-	httpHandlers, err := httpServer.NewHandler(cfg)
+	httpHandlers, err := httpServer.NewHandler(cfg, contactHandler)
 	if err != nil {
 		errTxt := fmt.Sprintf("#app_e3. Error create new httpHandlers: %v", err)
 		log.Error(errTxt)
