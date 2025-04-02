@@ -26,7 +26,7 @@ type (
 	}
 )
 
-func New(fileName string) (*Config, error) {
+func NewConfig(fileName string) (*Config, error) {
 	viper.SetConfigName(fileName)
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath("./configs")

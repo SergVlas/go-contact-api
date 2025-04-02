@@ -10,7 +10,7 @@ type Server struct {
 	httpServer *http.Server
 }
 
-func New(cfg *config.Config, handlers http.Handler) (*Server, error) {
+func NewServer(cfg *config.Config, handlers http.Handler) (*Server, error) {
 	return &Server{
 		httpServer: &http.Server{
 			Addr:    ":" + cfg.HTTP.Port,

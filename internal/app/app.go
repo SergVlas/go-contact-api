@@ -18,13 +18,13 @@ func Run() {
 	appConfigFile := config.GetAppConfigFile()
 
 	// config
-	cfg, err := config.New(appConfigFile)
+	cfg, err := config.NewConfig(appConfigFile)
 	if err != nil {
 		fatalLog.Fatalf("#app_e1. Error create new config: %v", err)
 	}
 
 	// log
-	log, err := logger.New(cfg)
+	log, err := logger.NewLogger(cfg)
 	if err != nil {
 		fatalLog.Fatalf("#app_e2. Error create new logger: %v", err)
 	}
@@ -38,7 +38,7 @@ func Run() {
 	}
 
 	// http server
-	httpSrv, err := httpServer.New(cfg, httpHandlers)
+	httpSrv, err := httpServer.NewServer(cfg, httpHandlers)
 	if err != nil {
 		errTxt := fmt.Sprintf("#app_e4. Error create new httpServer: %v", err)
 		log.Error(errTxt)
